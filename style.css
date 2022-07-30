@@ -1,0 +1,271 @@
+/*Reseting page*/
+*{
+    /*Deals with space outside the element*/
+    margin:0;
+
+    /*Deals with space inside the element*/
+    padding:0;
+
+    /*Does what?*/
+    box-sizing: border-box;
+}
+
+/*check to see if style sheet is linked with html.  I used the background-color yellow and it works.*/
+body{
+
+    /*background color*/
+    background-color: #10121b;
+
+    /*text color*/
+    color:#fff; 
+
+    /*from google fonts*/
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+
+}
+
+/*parent container*/
+.main-content{
+
+/*how to make lines visible with position*/
+    position:relative;
+
+    /*Gives the main content a big height*/
+    min-height:100vh;
+}
+
+.lines{
+
+/*Width of the lines will cover the width 100%*/
+width: 100%;
+
+/*Minimum height of 100%*/
+min-height:100%;
+
+/*how to make lines visible with position*/
+position:absolute;
+
+/*how to make lines visible with top*/
+top:0;
+
+/*Moves the lines from on top of each other to side by side with display of flex and I think you need this to see the lines.*/
+display:flex;
+    
+/*Spaces out the lines evenly across the page with justify-content and I think you need this to see the lines.*/
+justify-content:space-evenly;
+
+/*I had to change the color of ::after to black and the width had to be atleast 25% using inspect to see that this z-index of 1 puts my white line in front of the before and after loading bars  and a index of 0 puts the white line behind my before and after loading bars.
+
+HOVER PROBLEM AND ANCHOR TAG LINKS NOT WORKING SOLVED BY CHANGING THE Z-INDEX FROM 1 TO 0, NOW ALL MY HOVER CODE WORKS.*/
+z-index:0;
+
+}
+
+/*Selecting multiple classes with a comma so all these will have the same style*/
+.line-1, .line-2, .line-3, .line-4{
+
+    width: 1px;
+
+    background-color:#fff;
+
+    /*how visible the element is going to be (from 0 to 1)*/
+    opacity:0.1;
+
+    /*minimum height of the lines will be 100%*/
+    min-height:100%;
+
+    
+}
+
+.content{
+
+    /*top and bottom 6 rem and left and right is 10 rem*/
+    padding: 6rem  10rem;
+}
+
+/*parent container*/
+.title-container{
+
+    position:relative;
+
+    width: 50%;
+}
+
+/*targeting p and h2.  Also not using a lot of p tags so won't give it a class.*/
+p, h2{
+
+    text-transform:uppercase;
+
+}
+
+/*Targeting the h2*/
+.title-container h2{
+
+    /*big font*/
+font-size: 3rem;
+
+/*makes text bolder*/
+font-weight: 600;
+
+}
+
+/*target the paragraph tag*/
+.title-container p{
+ /*big font*/
+ font-size: 4rem;
+
+ /*makes text bolder*/
+ font-weight: 700;
+
+ /*low opacity, I like how it is not as visible*/
+ opacity:0.06;
+
+ /*how to position this element wherever you want*/
+ position:absolute;
+
+ top:50%;
+
+ left:0;
+}
+
+/*pseudo-element using before to use these different properties to put a line (loading bar) above the h2 words*/
+.title-container::before{
+
+    /*empty string like empty div*/
+    content:'';
+    /*to position the line wherever you want to*/
+    position: absolute;
+
+    /*Will stop your bottom property from moving your blue bar under the h2 words so comment this out.*/
+    /*top:0;*/
+
+    left:0;
+
+    width: 40%;
+
+    height:.48rem;
+
+    background-color: #0381ff6b;
+
+    /*moves my bar from on top of the h2 words to the bottom of the h2 words*/
+    bottom: -20%;
+
+    /*makes the corners of the blue bar rounded*/
+    border-radius: 12px;
+
+    /*NOT WORKING TO MOVE THE LOADING BAR BEHIND THE WHITE LINE AND I EVEN GAVE ::AFTER A Z-INDEX NEGATIVE AND POSITIVE AND I DID A NEGATIVE AND POSITIVE FOR THIS ::BEFORE PSEUDO ELEMENT AND THIS DOES NOT WORK.  I USED AN INDEX OF 1 IN .LINES TO MAKE THIS HAPPEN, PUTTING THE LOADING BAR BEHIND THE WHITE LINE.  IF I USE AN INDEX OF 1 FOR THE BEFORE HERE THEN MY BEFORE BAR WILL BE INFRONT OF MY AFTER BAR (WHICH LOADS THE BEFORE BAR).*/
+    /*z-index:-2;*/
+
+}
+
+/*pseudo-element using after to use these different properties to put a line which (loads the bar) below the h2 words and so this bar is on top of the ::before line bar.*/
+.title-container::after{
+
+    /*empty string like empty div*/
+    content:'';
+    /*to position the line wherever you want to*/
+    position: absolute;
+
+    /*Will stop your bottom property from moving your blue bar under the h2 words so comment this out.*/
+    /*top:0;*/
+
+    left:0;
+
+    /*If you increase of decrease the percentage it will show how much or less the loading bar is filled.*/
+    width: 25%;
+
+    height:.48rem;
+
+    background-color: #037fff;
+
+    /*moves my bar from on top of the h2 words to the bottom of the h2 words*/
+    bottom: -20%;
+
+    /*makes the corners of the blue bar rounded*/
+    border-radius: 12px;
+
+}
+
+.blogs-container{
+
+    /*Give me space between the p tag and my 1st blog image*/
+    margin-top: 6rem;
+
+    /*Need this to use grid*/
+    display: grid;
+
+    /*Gives me 3 equal sized columns.*/
+    grid-template-columns: repeat(3, 1fr);
+
+    /*Puts a gap between all the images*/
+    grid-gap: 2rem;
+
+    /*test*/
+    position:relative;
+}
+
+.blogs-container a{
+
+text-decoration: none;
+color: #fff;
+font-size: 1.3rem;
+font-weight: 400;
+padding: .8rem 0;
+/*Made the padding show even more because when I did an inspect it showed padding of 8rem top and bottom and 0 left and right.*/
+display: inline-block;
+
+/*PROBLEM: SUPPOSE TO TRANSITION WHEN HOVERING OVER ANCHOR TAG WORDS BUT THE HOVER IS NOT WORKING*/
+transition:all .4s ease-in-out;
+
+/*test*/
+position:absolute;
+}
+
+/*pseudo  hover*/
+
+/*PROBLEM #1 
+: THIS IS NOT WORKING WHEN I HOVER OVER MY A TAG WORDS.*/
+.blogs-container a:hover{
+    color: #0381ff;
+}
+
+.blog-content{
+    /*Puts padding around the image and a tag words*/
+    padding:1rem;
+
+}
+
+.blog .image img{
+    /*Will cover 100% of the width of the grid cell*/
+    width: 100%;
+
+    height: 100%;
+    /*Want image to cover the entire grid cell, not streching or doing anything weird.*/
+    object-fit: cover;
+   
+}
+
+/*Gives my a tag words a background color*/
+.blog{
+    /*The guy used #191d2b*/
+    background-color:#037fff;
+
+    /*PROBLEM #3:
+     This goes with transform: translatey(-5px) below so I guess to make the boxes moving up and stopping go smoother.*/
+    transition: all .4s ease-in-out;
+
+    /*test*/
+    position:relative;
+}
+
+/*PROBLEM #2:
+ When you put the mouse over the images they should move upward and this hover is not working along with the cursor changing.*/ 
+.blog:hover{
+
+    /*Transform is to move something*/
+    /*Moves my images up when you hover over them*/
+    transform: translatey(-5px);
+
+    /*cursor will change when you hover*/
+    cursor:pointer;
+}
